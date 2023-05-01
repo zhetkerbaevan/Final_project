@@ -1,0 +1,12 @@
+<nav class="navbar navbar-expand-lg" th:fragment="navbar" style="background-color: cornflowerblue" xmlns:th="http://www.thymeleaf.org"
+	 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<div class="container-fluid">
+		<a class="navbar-brand" th:href="@{'/'}" style="color: black">Home</a>
+		<a class="nav-link active" aria-current="page" style="color:white" th:href="@{'/animals'}" sec:authorize="isAuthenticated()">Animals</a>
+		<a class="nav-link" style="color:white" th:href="@{'/profile'}" sec:authorize="isAuthenticated()" th:text="${currentUser.username}"></a>
+		<a class="nav-link" style="color:white" th:href="@{'/register'}" sec:authorize="isAnonymous()">Register</a>
+		<a class="nav-link" style="color:white" th:href="@{'/users'}" sec:authorize="hasRole('ROLE_ADMIN')">Users</a>
+		<a class="nav-link" style="color:white" sec:authorize="isAuthenticated()" href="JavaScript:void(0)" onclick="document.getElementById('logoutFormId').submit()">Logout</a>
+		<form th:action="@{'/logout'}" method="post" id="logoutFormId" sec:authorize="isAuthenticated()"></form>
+	</div>
+</nav>

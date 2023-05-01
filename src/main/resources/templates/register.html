@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+	<title>Register</title>
+</head>
+<body>
+<div class="container-fluid" th:insert="~{navbar}"></div>
+	<div class="main-contain container">
+		<div class="" style="margin-top: 100px; margin-left: 300px; margin-right: 300px">
+			<form class="card py-5 px-4" th:action="@{'/register'}" method="POST" style="background-color: cornflowerblue">
+				<h3 th:text="${error}"></h3>
+				<label>Username</label>
+				<input type="text" name="username_field" />
+
+				<label>Email</label>
+				<input type="email" name="email_field" />
+				<label>Password</label>
+				<input type="password" name="password_field" />
+
+				<label>RePassword</label>
+				<input type="password" name="re_password_field" />
+
+				<label>Name</label>
+				<input type="text" name="name_field"/>
+
+				<label>Surname</label>
+				<input type="text" name="surname_field"/>
+
+				<label>About me</label>
+				<input type="text" name="about_field" />
+
+				<label>Gender</label>
+				<select name="gender_field" >
+					<option th:each="gender : ${gender_list}" th:text="${gender.gender_name}" th:value="${gender.gender_id}"></option>
+				</select>
+				<button type="submit" class="btn btn-dark">SIGN UP</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
