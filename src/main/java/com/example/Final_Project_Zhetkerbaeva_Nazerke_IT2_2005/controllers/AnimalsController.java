@@ -22,6 +22,8 @@ import java.util.List;
 public class AnimalsController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private AnimalService animalService;
     private Users getUserData(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)){
@@ -31,8 +33,23 @@ public class AnimalsController {
         }
         return null;
     }
-    @Autowired
-    private AnimalService animalService;
+    @GetMapping("/")
+    @PreAuthorize("isAuthenticated()")
+    public String main(Model model) {
+        model.addAttribute("currentUser", getUserData());
+        List<Animals> animals = animalService.getAllAnimals();
+        for (Animals animal : animals) {
+            char[] chars = animal.getDescription().toString().toCharArray();
+            if(chars.length > 100){
+                animal.setDescription(animal.getDescription().toString().substring(0, 100) + "...");
+            } else {
+                animal.setDescription(animal.getDescription() + "...");
+            }
+        }
+        model.addAttribute("animals", animals);
+        return "main";
+    }
+
 
     @GetMapping("/animals")
     @PreAuthorize("isAuthenticated()")

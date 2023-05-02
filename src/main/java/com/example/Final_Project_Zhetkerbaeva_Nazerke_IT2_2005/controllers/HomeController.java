@@ -25,13 +25,11 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping("/")
-    @PreAuthorize("isAuthenticated()")
-    public String main(Model model) {
+    @GetMapping("/navbar")
+    public String navbar(Model model){
         model.addAttribute("currentUser", getUserData());
-        return "main";
+        return "navbar";
     }
-
     private Users getUserData(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)){
