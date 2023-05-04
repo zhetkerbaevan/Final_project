@@ -27,6 +27,9 @@ public class Animals {
     @Column(name="description")
     private String description;
 
+    @Column(name="photo")
+    private String photo;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Meal meal;
 
@@ -36,4 +39,13 @@ public class Animals {
     @ManyToOne(fetch = FetchType.EAGER)
     private Habitat habitat;
 
+    public Animals(Long animal_id, String type, int amount, String description, Meal meal, Classification classification, Habitat habitat) {
+        this.animal_id = animal_id;
+        this.type = type;
+        this.amount = amount;
+        this.description = description;
+        this.meal = meal;
+        this.classification = classification;
+        this.habitat = habitat;
+    }
 }

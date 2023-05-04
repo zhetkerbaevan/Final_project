@@ -1,8 +1,6 @@
 package com.example.Final_Project_Zhetkerbaeva_Nazerke_IT2_2005.controllers;
 
-import com.example.Final_Project_Zhetkerbaeva_Nazerke_IT2_2005.entities.Animals;
-import com.example.Final_Project_Zhetkerbaeva_Nazerke_IT2_2005.entities.Classification;
-import com.example.Final_Project_Zhetkerbaeva_Nazerke_IT2_2005.entities.Users;
+import com.example.Final_Project_Zhetkerbaeva_Nazerke_IT2_2005.entities.*;
 import com.example.Final_Project_Zhetkerbaeva_Nazerke_IT2_2005.services.AnimalService;
 
 import com.example.Final_Project_Zhetkerbaeva_Nazerke_IT2_2005.services.UserService;
@@ -28,6 +26,7 @@ public class APIController {
 
     @GetMapping("/users")
     public List<Users> getAllUsers(){
+        System.out.println(userService.getAllUsers().get(1));
         return userService.getAllUsers();
     }
 
@@ -45,5 +44,23 @@ public class APIController {
     public Classification addNewClassification(@RequestBody Classification classification){
         return animalService.addCl(classification);
     }
+
+   @PostMapping("addUser")
+    public Users addNewUser(@RequestBody UserDto userDto){
+       System.out.println(userDto);
+       Users user = new Users();
+       Gender gender = userService.getGender(userDto.getGender_id());
+       System.out.println(gender);
+       user.setUsername(userDto.getUsername());
+       user.setPassword(userDto.getPassword());
+       user.setName(userDto.getName());
+       user.setSurname(userDto.getSurname());
+       user.setEmail(userDto.getEmail());
+
+       user.setGender(gender);
+       user.setAbout_me(userDto.getAbout_me());
+       user.setTicket(false);
+       return userService.createUser(user);
+   }
 
 }

@@ -47,9 +47,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users createUser(Users user) {
+        System.out.println("from postman");
         Users checkUser = usersRepo.findByUsername(user.getUsername());
         if(checkUser == null){
-            Roles role = rolesRepo.findByRole("USER");
+            System.out.println("user is null");
+            Roles role = rolesRepo.findByRole("ROLE_USER");
             if(role!=null)
             {
                 ArrayList<Roles> roles = new ArrayList<>();
@@ -59,6 +61,7 @@ public class UserServiceImpl implements UserService {
                 return usersRepo.save(user);
             }
         }
+        System.out.println("user is not null");
         return null;
     }
 
