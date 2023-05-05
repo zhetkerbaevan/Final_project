@@ -13,14 +13,17 @@
     <title>Main Page</title>
 </head>
 <body>
-<div class="container-fluid" th:insert="~{navbar}"></div>
-<div class="container-cards">
+<div th:insert="~{navbar}"></div>
+<div class="div-body">
+    <div class="container-cards">
     <h1 class="text-center">Animals</h1>
     <div class="card-animals" th:each="animal : ${animals}">
-        <img src="https://1densen.files.wordpress.com/2013/10/cute-cats-068.jpg">
+        <img th:src="${animal.getPhoto()}">
         <h2 th:text="${animal.getType()}"></h2>
         <p th:text="${animal.getDescription()}"></p>
     </div>
+    </div>
 </div>
+<div th:insert="~{footer}"></div>
 </body>
 </html>

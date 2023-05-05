@@ -1,0 +1,29 @@
+.card {
+    width: 600px;
+}
+.div-body-login {
+    min-height: 86.7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.div-body-reg {
+    min-height: 86.7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.buttons-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.div-body {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}

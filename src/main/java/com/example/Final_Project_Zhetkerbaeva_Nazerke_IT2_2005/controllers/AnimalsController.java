@@ -76,6 +76,7 @@ public class AnimalsController {
     public String add_animal(@RequestParam(name="type_field") String type,
                              @RequestParam(name="amount_field") int amount,
                              @RequestParam(name="desc_field") String description,
+                             @RequestParam(name="photo_field") String photo_url,
                              @RequestParam(name="classification_id") Long classification_id,
                              @RequestParam(name="meal_id") Long meal_id,
                              @RequestParam(name="habitat_id") Long habitat_id) {
@@ -84,7 +85,7 @@ public class AnimalsController {
         Meal meal = animalService.getMeal(meal_id);
         Habitat habitat = animalService.getHabitat(habitat_id);
 
-        Animals animal = new Animals(null, type, amount, description, meal, classification, habitat);
+        Animals animal = new Animals(null, type, amount, description, photo_url, meal, classification, habitat);
         animalService.addAnimal(animal);
         return "redirect:/animals";
     }
@@ -111,6 +112,7 @@ public class AnimalsController {
                               @RequestParam(name="type_field") String type,
                               @RequestParam(name="amount_field") int amount,
                               @RequestParam(name="desc_field") String description,
+                              @RequestParam(name="photo_field") String photo_url,
                               @RequestParam(name="classification_id") Long classification_id,
                               @RequestParam(name="meal_id") Long meal_id,
                               @RequestParam(name="habitat_id") Long habitat_id) {
@@ -124,12 +126,31 @@ public class AnimalsController {
         animal.setType(type);
         animal.setAmount(amount);
         animal.setDescription(description);
+        animal.setPhoto(photo_url);
         animal.setClassification(classification);
         animal.setMeal(meal);
         animal.setHabitat(habitat);
 
         animalService.saveAnimal(animal);
         return "redirect:/animals";
+    }
+    @GetMapping("/add_animal_url")
+    public String add_animal_url(Model model){
+        List<Animals> animals = animalService.getAllAnimals();
+        model.addAttribute("animals", animals);
+
+        List<Classification> classifications = animalService.getAllClassification();
+        model.addAttribute("classifications", classifications);
+
+        List<Meal> meals = animalService.getAllMeal();
+        model.addAttribute("meals", meals);
+
+        List<Habitat> habitats = animalService.getAllHabitat();
+        model.addAttribute("habitats", habitats);
+
+        model.addAttribute("currentUser", getUserData());
+
+        return "add_animal";
     }
 
     @PostMapping("/deleteAnimal")

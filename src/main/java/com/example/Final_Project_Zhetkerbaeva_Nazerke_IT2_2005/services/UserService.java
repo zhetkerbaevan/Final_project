@@ -11,7 +11,7 @@ public interface UserService extends UserDetailsService {
     Users getUserByUsername(String username);
     List<Users> getAllUsers();
     Users createUser(Users user);
-    Users saveUser(Users users);
+    Users saveUser(Users user);
     Users getUser(Long id);
 
     List<Gender> getAllGender();
@@ -20,4 +20,6 @@ public interface UserService extends UserDetailsService {
     List<Roles> getAllRoles();
 
     Roles getRole(Long id);
+
+    void deleteUser(Users user);
 }

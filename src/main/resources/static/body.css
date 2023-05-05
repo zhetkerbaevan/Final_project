@@ -1,0 +1,32 @@
+.div-body {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+.div-body-profile{
+    min-height: 86.6vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.profile-box {
+    background: #529280;
+    text-align: center;
+    padding: 40px 90px;
+    position: relative;
+    border-radius: 20px;
+    color: #fff;
+}
+.div-body-animal {
+    min-height: 93vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.div-body-users {
+    min-height: 86.6vh;
+    display: flex;
+    flex-direction: column;
+}

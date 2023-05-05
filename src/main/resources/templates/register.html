@@ -8,41 +8,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/login.css" />
 	<title>Register</title>
 </head>
 <body>
-<div class="container-fluid" th:insert="~{navbar}"></div>
-	<div class="main-contain container">
-		<div class="" style="margin-top: 100px; margin-left: 300px; margin-right: 300px">
-			<form class="card py-5 px-4" th:action="@{'/register'}" method="POST" style="background-color: cornflowerblue">
-				<h3 th:text="${error}"></h3>
-				<label>Username</label>
-				<input type="text" name="username_field" />
-
-				<label>Email</label>
-				<input type="email" name="email_field" />
-				<label>Password</label>
-				<input type="password" name="password_field" />
-
-				<label>RePassword</label>
-				<input type="password" name="re_password_field" />
-
-				<label>Name</label>
-				<input type="text" name="name_field"/>
-
-				<label>Surname</label>
-				<input type="text" name="surname_field"/>
-
-				<label>About me</label>
-				<input type="text" name="about_field" />
-
-				<label>Gender</label>
-				<select name="gender_field" >
+<div th:insert="~{navbar}"></div>
+	<div class="div-body-reg">
+			<form class="card py-5 px-4" th:action="@{'/register'}" method="POST">
+				<h5 th:text="${error}"></h5>
+				<div class="mb-3-sm">
+				<label class="form-label">Username</label>
+				<input type="text" name="username_field" class="form-control"/>
+				</div>
+				<div class="mb-3">
+				<label class="form-label">Email</label>
+				<input type="email" name="email_field" class="form-control"/>
+				</div>
+				<div class="mb-3">
+				<label class="form-label">Password</label>
+				<input type="password" name="password_field" class="form-control"/>
+				</div>
+				<div class="mb-3">
+				<label class="form-label">Enter Password again</label>
+				<input type="password" name="re_password_field" class="form-control"/>
+				</div>
+				<div class="mb-3">
+				<label class="form-label">Name</label>
+				<input type="text" name="name_field" class="form-control"/>
+				</div>
+				<div class="mb-3">
+				<label class="form-label">Surname</label>
+				<input type="text" name="surname_field" class="form-control"/>
+				</div>
+				<div class="mb-3">
+				<label class="form-label">About me</label>
+				<input type="text" name="about_field" class="form-control"/>
+				</div>
+				<div class="mb-3">
+				<label class="form-label">Gender</label>
+				<select name="gender_field" class="form-control">
 					<option th:each="gender : ${gender_list}" th:text="${gender.gender_name}" th:value="${gender.gender_id}"></option>
 				</select>
-				<button type="submit" class="btn btn-dark">SIGN UP</button>
+				</div>
+				<button type="submit" class="btn btn-new" style="background-color: #2f5c4f; color: #fff;">Sign Up</button>
 			</form>
 		</div>
-	</div>
+<div th:insert="~{footer}"></div>
 </body>
 </html>

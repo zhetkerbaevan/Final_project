@@ -65,14 +65,16 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+
     @Override
     public Users getUser(Long id) {
         return usersRepo.getOne(id);
     }
 
     @Override
-    public Users saveUser(Users users) {
-        return usersRepo.save(users);
+    public Users saveUser(Users user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return usersRepo.save(user);
     }
 
     @Override
@@ -98,5 +100,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Users> getAllUsers() {
         return usersRepo.findAll();
+    }
+
+    @Override
+    public void deleteUser(Users user) {
+        usersRepo.delete(user);
     }
 }
