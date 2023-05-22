@@ -268,4 +268,10 @@ public class UsersController {
         }
         return "redirect:/users";
     }
+
+    @GetMapping("/payment")
+    public String getPayment(Model model){
+        model.addAttribute("currentUser", getUserData());
+        return "payment";
+    }
 }

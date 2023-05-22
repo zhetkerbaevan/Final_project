@@ -68,6 +68,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users getUser(Long id) {
+        Users user = usersRepo.getOne(id);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return usersRepo.getOne(id);
     }
 
