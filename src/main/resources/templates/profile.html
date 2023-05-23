@@ -15,6 +15,7 @@
 <div th:insert="~{navbar}"></div>
 <div class="div-body-profile">
     <div class="profile-box">
+        <input type="hidden" name="id" th:value="${currentUser.getUser_id()}" />
         <h2 th:text="'@' + ${currentUser.getUsername()}"></h2>
         <h3 th:text="${currentUser.getName()} + ' ' + ${currentUser.getSurname()}"></h3>
         <p th:text="'About Me: ' + ${currentUser.getAbout_me()}"></p>
@@ -23,7 +24,13 @@
             <i class="fas fa-envelope-open-text"></i>
             <span th:text="${currentUser.getEmail()}"></span>
         </p>
+        <p th:text="'Tickets: ' + ${currentUser.amount_of_ticket}"></p>
     <a th:href="@{'/edit_profile/' + ${currentUser.getUser_id()}}" class="btn btn-outline-light">EDIT</a>
+        <form th:action="@{'/getPaymentByUserId/' + ${currentUser.getUser_id()}}" method="get">
+            <button class="btn btn-outline-light">
+            Get Info About My Card
+            </button>
+        </form>
     </div>
 </div>
 <div th:insert="~{footer}"></div>

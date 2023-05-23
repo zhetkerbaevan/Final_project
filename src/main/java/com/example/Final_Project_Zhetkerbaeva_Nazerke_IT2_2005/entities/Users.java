@@ -40,6 +40,9 @@ public class Users  {
     @Column(name="ticket")
     private boolean ticket;
 
+    @Column(name="amount_of_ticket")
+    private int amount_of_ticket;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Roles> roles;
 

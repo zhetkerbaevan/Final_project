@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +28,32 @@ public class UsersController {
     String error;
     @GetMapping("/profile")
     @PreAuthorize("isAuthenticated()")
-    public String profile(Model model) {
+    public String profile(Model model, HttpSession session) {
         model.addAttribute("currentUser", getUserData());
         return "profile";
+    }
+
+    @GetMapping("/paymentinfo")
+    public String paymentInfo(Model model, HttpSession session){
+        Long paymentId = (Long) session.getAttribute("payment_id");
+        String card_number = (String) session.getAttribute("card_number");
+        String expiration = (String) session.getAttribute("expiration");
+        int card_v_number = (int) session.getAttribute("card_v_number");
+        int amount = (int) session.getAttribute("amount");
+        PaymentDto paymentDto = new PaymentDto();
+        if (paymentId != null && !card_number.equals("") && !expiration.equals("") && card_v_number != 0 && amount != 0){
+            paymentDto.setPayment_id(paymentId);
+            paymentDto.setCard_number(card_number);
+            paymentDto.setExpiration(expiration);
+            paymentDto.setCard_v_number(card_v_number);
+            paymentDto.setAmount(amount);
+        }
+        if (paymentDto.getPayment_id() != null){
+            model.addAttribute("currentPayment", paymentDto);
+            System.out.println(paymentDto);
+        }
+        model.addAttribute("currentUser", getUserData());
+        return "paymentinfo";
     }
 
     private Users getUserData(){
@@ -100,7 +124,10 @@ public class UsersController {
         //System.out.println("Role_id " + role_id);
         Gender gender = userService.getGender(gender_id);
         //System.out.println("gender: " + gender);
-            if (password.equals(rePassword)) {
+        if(username.equals("") || email.equals("") || password.equals("") || rePassword.equals("") || name.equals("") || surname.equals("")){
+            error = "You must enter all data";
+        }
+           else if (password.equals(rePassword)) {
                 Users newUser = new Users();
                 newUser.setUsername(username);
                 newUser.setPassword(password);
