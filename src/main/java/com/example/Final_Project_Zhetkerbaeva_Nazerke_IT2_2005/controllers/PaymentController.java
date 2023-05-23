@@ -69,7 +69,6 @@ public class PaymentController {
         session.setAttribute("card_number", payment.getCard_number());
         session.setAttribute("expiration", payment.getExpiration());
         session.setAttribute("card_v_number", payment.getCard_v_number());
-        session.setAttribute("amount", payment.getAmount());
 
         String paymentPage = "/paymentinfo";
         return new RedirectView(paymentPage);

@@ -39,19 +39,19 @@ public class UsersController {
         String card_number = (String) session.getAttribute("card_number");
         String expiration = (String) session.getAttribute("expiration");
         int card_v_number = (int) session.getAttribute("card_v_number");
-        int amount = (int) session.getAttribute("amount");
+        System.out.println("card number from api " + card_number);
         PaymentDto paymentDto = new PaymentDto();
-        if (paymentId != null && !card_number.equals("") && !expiration.equals("") && card_v_number != 0 && amount != 0){
+        if (paymentId != null && !card_number.equals("") && !expiration.equals("") && card_v_number != 0){
             paymentDto.setPayment_id(paymentId);
             paymentDto.setCard_number(card_number);
             paymentDto.setExpiration(expiration);
             paymentDto.setCard_v_number(card_v_number);
-            paymentDto.setAmount(amount);
         }
         if (paymentDto.getPayment_id() != null){
             model.addAttribute("currentPayment", paymentDto);
             System.out.println(paymentDto);
         }
+        System.out.println("payment class: " + paymentDto);
         model.addAttribute("currentUser", getUserData());
         return "paymentinfo";
     }
